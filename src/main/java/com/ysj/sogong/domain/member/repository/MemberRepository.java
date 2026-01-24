@@ -11,12 +11,12 @@ public class MemberRepository
 {
   public static List<Member> members = new ArrayList<>();
 
-  public Member getMember(String name)
+  public Member getMember(String username)
   {
     Member findMember = null;
     for(Member member : members)
     {
-      if(member.getName().equals(name))
+      if(member.getUsername().equals(username))
       {
         findMember = member;
       }

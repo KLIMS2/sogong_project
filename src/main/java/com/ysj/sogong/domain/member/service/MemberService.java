@@ -36,6 +36,6 @@ public class MemberService implements UserDetailsService
       authorities.add(new SimpleGrantedAuthority("user")); // 일반 사용자 권한 부여
     }
 
-    return new org.springframework.security.core.userdetails.User(member.getName(), member.getPassword(), authorities);
+    return new org.springframework.security.core.userdetails.User(member.getUsername(), member.getPassword(), authorities);
   }
 }

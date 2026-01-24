@@ -34,10 +34,14 @@ public class MemberController
   public Member doJoin(Member member)
   {
     String encodedPassword = passwordEncoder.encode(member.getPassword());
-    MemberRepository.members.add(new Member(member.getName(), encodedPassword));
+    MemberRepository.members.add(
+        Member.builder()
+            .username(member.getUsername())
+            .password(encodedPassword)
+            .build());
     MemberRepository.members.forEach(user -> {
       System.out.println(user.getId());
-      System.out.println(user.getName());
+      System.out.println(user.getUsername());
       System.out.println(user.getPassword());
       System.out.println(passwordEncoder.matches(1234 + "", user.getPassword()));
     });
@@ -49,7 +53,7 @@ public class MemberController
   {
     MemberRepository.members.forEach(user -> {
       System.out.println(user.getId());
-      System.out.println(user.getName());
+      System.out.println(user.getUsername());
       System.out.println(user.getPassword());
       System.out.println(passwordEncoder.matches(1234 + "", user.getPassword()));
     });
