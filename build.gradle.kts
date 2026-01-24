@@ -42,6 +42,9 @@ dependencies {
 
 	// JPA
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+	// DB (mariaDB)
+	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
 }
 
 tasks.withType<Test> {

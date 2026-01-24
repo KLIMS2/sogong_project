@@ -7,6 +7,14 @@ spring:
   thymeleaf:
     cache: false
     prefix: file:src/main/resources/templates/ # 템플릿 파일 경로
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
+    username: root
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update # DB 테이블 자동생성
 
 server:
   port: 8080
