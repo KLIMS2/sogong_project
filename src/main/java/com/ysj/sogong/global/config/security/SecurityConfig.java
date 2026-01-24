@@ -1,5 +1,6 @@
 package com.ysj.sogong.global.config.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+@Slf4j
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig
@@ -21,10 +23,17 @@ public class SecurityConfig
             .requestMatchers("/member/join", "/member/login", "/home").permitAll()
             .anyRequest().authenticated())
         .formLogin(form -> form
-            .loginPage("/member/login")
-            .loginProcessingUrl("/member/login")
-            .defaultSuccessUrl("/member/myPage")
-            .permitAll());
+            .loginPage("/member/login") // GET (security -> me)
+            .loginProcessingUrl("/member/login") // POST (me -> security)
+            .defaultSuccessUrl("/member/myPage") // GET
+            .permitAll())
+        .logout(logout -> logout
+            .logoutUrl("/member/logout") // POST (me -> security)
+            .logoutSuccessUrl("/home") // GET
+            .invalidateHttpSession(true) // 세션 삭제
+            .permitAll()
+        );
+
     return http.build();
   }
 

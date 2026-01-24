@@ -1,13 +1,13 @@
 package com.ysj.sogong.domain.member.controller;
 
 import com.ysj.sogong.domain.member.dto.MemberDto;
-import com.ysj.sogong.domain.member.entity.Member;
-import com.ysj.sogong.domain.member.repository.MemberRepository;
 import com.ysj.sogong.domain.member.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +42,12 @@ public class MemberController
   public String showLogin()
   {
     return "/member/login";
+  }
+
+  @GetMapping("/logout")
+  public String showLogout()
+  {
+    return "/member/logout";
   }
 
   @PreAuthorize("isAuthenticated()")
