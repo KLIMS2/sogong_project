@@ -14,7 +14,7 @@ spring:
     password:
   jpa:
     hibernate:
-      ddl-auto: update # DB 테이블 자동생성
+      ddl-auto: create # DB 테이블 자동생성
 
 server:
   port: 8080

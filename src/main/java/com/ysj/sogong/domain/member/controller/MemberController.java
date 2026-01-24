@@ -1,5 +1,6 @@
 package com.ysj.sogong.domain.member.controller;
 
+import com.ysj.sogong.domain.member.dto.MemberDto;
 import com.ysj.sogong.domain.member.entity.Member;
 import com.ysj.sogong.domain.member.repository.MemberRepository;
 import com.ysj.sogong.domain.member.service.MemberService;
@@ -21,7 +22,6 @@ import java.security.Principal;
 public class MemberController
 {
   private final MemberService memberService;
-  private final PasswordEncoder passwordEncoder;
 
   @GetMapping("/join")
   public String showJoin()
@@ -31,32 +31,16 @@ public class MemberController
 
   @PostMapping("/join")
   @ResponseBody
-  public Member doJoin(Member member)
+  public MemberDto doJoin(MemberDto memberForm)
   {
-    String encodedPassword = passwordEncoder.encode(member.getPassword());
-    MemberRepository.members.add(
-        Member.builder()
-            .username(member.getUsername())
-            .password(encodedPassword)
-            .build());
-    MemberRepository.members.forEach(user -> {
-      System.out.println(user.getId());
-      System.out.println(user.getUsername());
-      System.out.println(user.getPassword());
-      System.out.println(passwordEncoder.matches(1234 + "", user.getPassword()));
-    });
-    return MemberRepository.members.getLast();
+    MemberDto member = memberService.createMember(memberForm);
+
+    return member;
   }
 
   @GetMapping("/login")
   public String showLogin()
   {
-    MemberRepository.members.forEach(user -> {
-      System.out.println(user.getId());
-      System.out.println(user.getUsername());
-      System.out.println(user.getPassword());
-      System.out.println(passwordEncoder.matches(1234 + "", user.getPassword()));
-    });
     return "/member/login";
   }
 
