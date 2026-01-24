@@ -2,11 +2,8 @@ package com.ysj.sogong.domain.member.controller;
 
 import com.ysj.sogong.domain.member.dto.MemberDto;
 import com.ysj.sogong.domain.member.service.MemberService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +41,7 @@ public class MemberController
     return "/member/login";
   }
 
+  @PreAuthorize("isAuthenticated()")
   @GetMapping("/logout")
   public String showLogout()
   {
