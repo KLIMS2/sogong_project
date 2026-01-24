@@ -1,31 +1,23 @@
 package com.ysj.sogong.domain.member.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@EntityListeners(AuditingEntityListener.class)
+@Entity
 public class Member
 {
-  private static int lastID;
-
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String id;
-  private String name;
+
+  @Column(unique = true)
+  private String username;
   private String password;
-
-  static
-  {
-    lastID = 0;
-  }
-
-  public Member(String name, String password)
-  {
-    id = (++lastID) + "";
-    this.name = name;
-    this.password = password;
-  }
 }
