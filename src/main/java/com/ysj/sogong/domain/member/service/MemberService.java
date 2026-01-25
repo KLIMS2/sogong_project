@@ -6,6 +6,7 @@ import com.ysj.sogong.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,12 +36,12 @@ public class MemberService implements UserDetailsService
     List<GrantedAuthority> authorities = new ArrayList<>();
 
     if ("admin".equals(username)) {
-      authorities.add(new SimpleGrantedAuthority("admin")); // 관리자 권한 부여
+      authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN")); // 관리자 권한 부여
     } else {
-      authorities.add(new SimpleGrantedAuthority("user")); // 일반 사용자 권한 부여
+      authorities.add(new SimpleGrantedAuthority("ROLE_USER")); // 일반 사용자 권한 부여
     }
 
-    return new org.springframework.security.core.userdetails.User(member.getUsername(), member.getPassword(), authorities);
+    return new User(member.getUsername(), member.getPassword(), authorities);
   }
 
   public MemberDto createMember(MemberDto memberDto)

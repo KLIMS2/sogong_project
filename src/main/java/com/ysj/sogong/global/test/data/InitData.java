@@ -13,13 +13,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class InitData
 {
   @Bean
-  CommandLineRunner commandLineRunner(MemberService memberService, PasswordEncoder passwordEncoder)
+  CommandLineRunner commandLineRunner(MemberService memberService)
   {
     return args -> {
-      String password = passwordEncoder.encode("1234");
-      memberService.createMember(new MemberDto(1, "user1", password));
-      memberService.createMember(new MemberDto(2, "user2", password));
-      memberService.createMember(new MemberDto(3, "user3", password));
+      memberService.createMember(new MemberDto(1, "user1", "1234"));
+      memberService.createMember(new MemberDto(2, "user2", "1234"));
+      memberService.createMember(new MemberDto(3, "user3", "1234"));
     };
   }
 }
