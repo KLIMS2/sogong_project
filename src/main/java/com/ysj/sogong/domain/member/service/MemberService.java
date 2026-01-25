@@ -44,22 +44,16 @@ public class MemberService implements UserDetailsService
     return new User(member.getUsername(), member.getPassword(), authorities);
   }
 
-  public MemberDto createMember(MemberDto memberDto)
+  public MemberDto createMember(MemberDto memberForm)
   {
-    String encodedPassword = passwordEncoder.encode(memberDto.getPassword());
+    String encodedPassword = passwordEncoder.encode(memberForm.getPassword());
     Member member = Member.builder()
-        .username(memberDto.getUsername())
+        .username(memberForm.getUsername())
         .password(encodedPassword)
         .build();
 
     member = memberRepository.save(member);
-
-    MemberDto newMember = MemberDto.builder()
-        .id(member.getId())
-        .username(member.getUsername())
-        .password(member.getPassword())
-        .build();
-
-    return newMember;
+    MemberDto memberDto = new MemberDto(member);
+    return memberDto;
   }
 }

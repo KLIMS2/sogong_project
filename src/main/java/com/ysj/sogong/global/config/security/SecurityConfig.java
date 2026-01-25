@@ -11,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Slf4j
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig
@@ -28,10 +27,6 @@ public class SecurityConfig
             .loginPage("/member/login") // GET (security -> me)
             .loginProcessingUrl("/member/login") // POST (me -> security)
             .defaultSuccessUrl("/member/myPage") // GET
-            .failureHandler((request, response, exception) -> {
-              // 여기서 에러 원인을 로그로 찍어보세요!
-              log.error("로그인 실패 원인: {}", exception.getMessage());
-              response.sendRedirect("/user/login?error");})
             .permitAll())
         .logout(logout -> logout
             .logoutUrl("/member/logout") // POST (me -> security)
