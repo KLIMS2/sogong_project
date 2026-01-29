@@ -18,6 +18,11 @@ public class BoardClassService
     return boardClassRepository.save(boardClass);
   }
 
+  public BoardClass findBoardClass(int id)
+  {
+    return boardClassRepository.findById(id);
+  }
+
   public List<BoardClass> findBoardClassAll()
   {
     return boardClassRepository.findAll();

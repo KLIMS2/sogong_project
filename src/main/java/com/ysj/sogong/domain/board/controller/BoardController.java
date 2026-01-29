@@ -3,6 +3,7 @@ package com.ysj.sogong.domain.board.controller;
 import com.ysj.sogong.domain.board.boardClass.entity.BoardClass;
 import com.ysj.sogong.domain.board.boardClass.service.BoardClassService;
 import com.ysj.sogong.domain.board.entity.Board;
+import com.ysj.sogong.domain.board.form.BoardForm;
 import com.ysj.sogong.domain.board.service.BoardService;
 import com.ysj.sogong.global.security.dto.LoginedMember;
 import lombok.RequiredArgsConstructor;
@@ -34,11 +35,12 @@ public class BoardController
 
   @PreAuthorize("isAuthenticated()")
   @PostMapping("/create")
-  public String doCreate(Board board,
+  public String doCreate(BoardForm boardForm,
                          @AuthenticationPrincipal LoginedMember loginedMember,
                          Model model)
   {
-    board = boardService.createBoard(board, loginedMember);
+    boardForm.setLoginedMember(loginedMember);
+    Board board = boardService.createBoard(boardForm);
     model.addAttribute("board", board);
     return "/board/detail";
   }

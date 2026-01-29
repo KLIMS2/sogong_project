@@ -134,3 +134,12 @@
 
 (게시판 바로가기 수정 커밋)
 - 로그인을 했을 때만 게시판 생성 링크가 생기게 수정
+
+(Board 수정 커밋)
+- Board 엔티티에서 boardClassId 속성 대신 boardClass 속성으로 변경
+- boardClass 속성에 ManyToOne 태그를 붙여 DB에는 boardClassId가 외래키로써 저장
+- BoardForm 클래스 생성
+- BoardClassService에 BoardClass를 찾는 기능 추가
+- BoardService 수정
+- BoardController 수정
+- 게시판 상세보기 페이지 수정

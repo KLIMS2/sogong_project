@@ -6,7 +6,8 @@
         <div th:text="|id: ${board.id}|"></div>
         <div th:text="|username: ${board.username}|"></div>
         <div th:text="|title: ${board.title}|"></div>
-        <div th:text="|boardClassId: ${board.boardClassId}|"></div>
+        <div th:text="|boardClassId: ${board.boardClass.id}|"></div>
+        <div th:text="|boardClassName: ${board.boardClass.className}|"></div>
     </section>
 </body>
 </html>

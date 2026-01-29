@@ -20,6 +20,9 @@ public class Board
 
   private String username;
   private String title;
-  private int boardClassId;
+
+  @ManyToOne
+  @JoinColumn(name = "board_class_id")
+  private BoardClass boardClass;
 }
 
