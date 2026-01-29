@@ -76,6 +76,7 @@
 
 # % 3주차
 ## 회원(이용자) 관리 시스템 구축
+## 게시판 관리 시스템 구축
 
 (기본 페이지 생성 커밋)
 - index.html 생성
@@ -143,3 +144,7 @@
 - BoardService 수정
 - BoardController 수정
 - 게시판 상세보기 페이지 수정
+
+(Article 엔티티 생성 커밋)
+- Article 엔티티 생성
+- ArticleController 생성
