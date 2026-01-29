@@ -1,6 +1,6 @@
 package com.ysj.sogong.global.init.member;
 
-import com.ysj.sogong.domain.member.dto.MemberDto;
+import com.ysj.sogong.domain.member.entity.Member;
 import com.ysj.sogong.domain.member.service.MemberService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -15,9 +15,9 @@ public class InitMember
   CommandLineRunner commandLineRunnerMember(MemberService memberService)
   {
     return args -> {
-      memberService.createMember(new MemberDto(1, "user1", "1234"));
-      memberService.createMember(new MemberDto(2, "user2", "1234"));
-      memberService.createMember(new MemberDto(3, "user3", "1234"));
+      memberService.createMember(new Member("user1", "1234"));
+      memberService.createMember(new Member("user2", "1234"));
+      memberService.createMember(new Member("user3", "1234"));
     };
   }
 }

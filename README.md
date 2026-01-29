@@ -113,3 +113,7 @@
 - BoardClassService 클래스 생성
 - BoardClassRepository 클래스 생성
 - InitBoardClass 클래스를 생성하여 프로그램 시작시 자동으로 데이터 생성 및 저장
+
+(MemberDto 제거 커밋)
+- MemberDto 클래스 제거
+- MemberDto 자리에 Member로 변환

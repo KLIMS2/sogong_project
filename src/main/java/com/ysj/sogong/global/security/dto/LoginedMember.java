@@ -1,6 +1,6 @@
 package com.ysj.sogong.global.security.dto;
 
-import com.ysj.sogong.domain.member.dto.MemberDto;
+import com.ysj.sogong.domain.member.entity.Member;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -18,13 +18,13 @@ public class LoginedMember extends User implements OAuth2User
   private Map<String, Object> attributes;
   private String userNameAttributeName;
 
-  public LoginedMember(MemberDto member, List<GrantedAuthority> authorities)
+  public LoginedMember(Member member, List<GrantedAuthority> authorities)
   {
     super(member.getUsername(), member.getPassword(), authorities);
     id = member.getId();
   }
 
-  public LoginedMember(MemberDto member, List<GrantedAuthority> authorities, Map<String, Object> attributes, String userNameAttributeName)
+  public LoginedMember(Member member, List<GrantedAuthority> authorities, Map<String, Object> attributes, String userNameAttributeName)
   {
     this(member, authorities);
     this.attributes = attributes;

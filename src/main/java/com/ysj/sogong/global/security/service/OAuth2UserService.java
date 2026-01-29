@@ -1,6 +1,6 @@
 package com.ysj.sogong.global.security.service;
 
-import com.ysj.sogong.domain.member.dto.MemberDto;
+import com.ysj.sogong.domain.member.entity.Member;
 import com.ysj.sogong.domain.member.service.MemberService;
 import com.ysj.sogong.global.exception.member.MemberNotFoundException;
 import com.ysj.sogong.global.exception.oAuth2.OAuthTypeMatchNotFoundException;
@@ -46,7 +46,7 @@ public class OAuth2UserService extends DefaultOAuth2UserService
       throw new OAuthTypeMatchNotFoundException();
     }
 
-    MemberDto member = null;
+    Member member = null;
 
     // OAuth ID로 가입된 회원이 없는 경우
     // 로그인시 회원가입을 실시(새 회원 생성)
@@ -67,7 +67,7 @@ public class OAuth2UserService extends DefaultOAuth2UserService
             email = (String) attributesKakaoAccount.get("email");
           }*/
 
-          member = MemberDto.builder()
+          member = Member.builder()
               .username(username)
               .password("")
               .build();

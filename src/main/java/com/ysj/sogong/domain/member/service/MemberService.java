@@ -1,6 +1,5 @@
 package com.ysj.sogong.domain.member.service;
 
-import com.ysj.sogong.domain.member.dto.MemberDto;
 import com.ysj.sogong.domain.member.entity.Member;
 import com.ysj.sogong.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,27 +13,23 @@ public class MemberService
   private final MemberRepository memberRepository;
   private final PasswordEncoder passwordEncoder;
 
-  public MemberDto createMember(MemberDto memberForm)
+  public Member createMember(Member memberDto)
   {
-    String encodedPassword = passwordEncoder.encode(memberForm.getPassword());
+    String encodedPassword = passwordEncoder.encode(memberDto.getPassword());
     Member member = Member.builder()
-        .username(memberForm.getUsername())
+        .username(memberDto.getUsername())
         .password(encodedPassword)
         .build();
-
-    member = memberRepository.save(member);
-    MemberDto memberDto = new MemberDto(member);
-    return memberDto;
+    return memberRepository.save(member);
   }
 
-  public MemberDto findMember(String username)
+  public Member findMember(String username)
   {
     Member member = memberRepository.findByUsername(username);
     if(member == null)
     {
       return null;
     }
-
-    return new MemberDto(member);
+    return member;
   }
 }

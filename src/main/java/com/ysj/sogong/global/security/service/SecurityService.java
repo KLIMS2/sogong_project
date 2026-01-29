@@ -1,6 +1,6 @@
 package com.ysj.sogong.global.security.service;
 
-import com.ysj.sogong.domain.member.dto.MemberDto;
+import com.ysj.sogong.domain.member.entity.Member;
 import com.ysj.sogong.domain.member.service.MemberService;
 import com.ysj.sogong.global.security.dto.LoginedMember;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class SecurityService implements UserDetailsService
   @Override
   public UserDetails loadUserByUsername(String username)
   {
-    MemberDto member = memberService.findMember(username);
+    Member member = memberService.findMember(username);
     if (member == null)
     {
       throw new UsernameNotFoundException("사용자를 찾을수 없습니다.");
