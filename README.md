@@ -105,5 +105,5 @@
 - 로그인시에만 로그아웃 버튼이 나오도록 수정
 
 (오류 수정 커밋)
-- application-secret.yaml 파일이 깃허브에 올라간 파일 삭제
+- 깃허브에 올라간 application-secret.yaml 파일 삭제
 - .gitignore 수정
