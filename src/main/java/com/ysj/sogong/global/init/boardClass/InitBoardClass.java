@@ -1,7 +1,7 @@
 package com.ysj.sogong.global.init.boardClass;
 
-import com.ysj.sogong.domain.board.boardClass.entity.BoardClass;
-import com.ysj.sogong.domain.board.boardClass.service.BoardClassService;
+import com.ysj.sogong.domain.boardClass.entity.BoardClass;
+import com.ysj.sogong.domain.boardClass.service.BoardClassService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

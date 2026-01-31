@@ -1,7 +1,7 @@
 package com.ysj.sogong.domain.board.controller;
 
-import com.ysj.sogong.domain.board.boardClass.entity.BoardClass;
-import com.ysj.sogong.domain.board.boardClass.service.BoardClassService;
+import com.ysj.sogong.domain.boardClass.entity.BoardClass;
+import com.ysj.sogong.domain.boardClass.service.BoardClassService;
 import com.ysj.sogong.domain.board.entity.Board;
 import com.ysj.sogong.domain.board.form.BoardForm;
 import com.ysj.sogong.domain.board.service.BoardService;

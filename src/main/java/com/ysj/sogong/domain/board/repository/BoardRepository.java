@@ -1,6 +1,5 @@
 package com.ysj.sogong.domain.board.repository;
 
-import com.ysj.sogong.domain.board.boardClass.entity.BoardClass;
 import com.ysj.sogong.domain.board.entity.Board;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

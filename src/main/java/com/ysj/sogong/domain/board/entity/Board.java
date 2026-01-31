@@ -1,6 +1,6 @@
 package com.ysj.sogong.domain.board.entity;
 
-import com.ysj.sogong.domain.board.boardClass.entity.BoardClass;
+import com.ysj.sogong.domain.boardClass.entity.BoardClass;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

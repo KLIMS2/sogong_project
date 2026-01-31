@@ -1,4 +1,4 @@
-package com.ysj.sogong.domain.board.boardClass.entity;
+package com.ysj.sogong.domain.boardClass.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

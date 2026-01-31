@@ -1,6 +1,5 @@
 package com.ysj.sogong.domain.article.entity;
 
-import com.ysj.sogong.domain.board.boardClass.entity.BoardClass;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

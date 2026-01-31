@@ -1,7 +1,7 @@
-package com.ysj.sogong.domain.board.boardClass.service;
+package com.ysj.sogong.domain.boardClass.service;
 
-import com.ysj.sogong.domain.board.boardClass.entity.BoardClass;
-import com.ysj.sogong.domain.board.boardClass.repository.BoardClassRepository;
+import com.ysj.sogong.domain.boardClass.entity.BoardClass;
+import com.ysj.sogong.domain.boardClass.repository.BoardClassRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

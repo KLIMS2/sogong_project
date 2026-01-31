@@ -30,7 +30,7 @@ spring:
       client:
         registration:
           kakao:
-            clientId:
+            clientId: # NEED_INPUT
             scope: profile_nickname, profile_image, account_email
             client-name: Kakao
             authorization-grant-type: authorization_code

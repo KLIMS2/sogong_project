@@ -52,6 +52,9 @@ dependencies {
 
 	// OAuth2
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+
+	// JSoup
+	implementation("org.jsoup:jsoup:1.15.4")
 }
 
 tasks.withType<Test> {

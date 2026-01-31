@@ -148,3 +148,6 @@
 (Article 엔티티 생성 커밋)
 - Article 엔티티 생성
 - ArticleController 생성
+
+(boardClass 패키지 분리 커밋)
+- boardClass 패키지를 board 패키지로부터 분리
