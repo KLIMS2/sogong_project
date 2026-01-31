@@ -6,7 +6,6 @@
         <div th:with="loginedMember = ${#authentication.principal}">
             <div th:text="|id: ${loginedMember.id}|"></div>
             <div th:text="|username: ${loginedMember.username}|"></div>
-            <div th:text="|password: ${loginedMember.password}|"></div>
         </div>
     </section>
 </body>
