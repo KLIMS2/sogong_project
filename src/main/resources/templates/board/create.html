@@ -1,18 +1,63 @@
 <html layout:decorate="~{layout/layout.html}">
-<body>
-    <section layout:fragment="content">
-        <h1>board create</h1>
+    <body>
+        <section layout:fragment="content">
+            <h1>board create</h1>
 
-        <form th:action="@{/board/create}" method="post">
-            <div>게시판 이름</div>
-            <input type="text" placeholder="제목" name="title">
-            <div>게시판 종류</div>
-            <select name="boardClassId">
-                <option th:each="boardClass : ${boardClasses}" th:value="${boardClass.id}" th:text="${boardClass.className}"></option>
-            </select>
+            <form th:action="@{/board/create}"
+                  method="post"
+                  onsubmit="checkForm(this); return false;"
+                  class="flex flex-col gap-2">
+                <div class="flex flex-col">
+                    <label for="title">게시판 이름</label>
+                    <input type="text"
+                           name="title"
+                           id="title"
+                           placeholder="게시판 이름"
+                           class="input"/>
+                </div>
+                <div class="flex flex-col">
+                    <label for="boardClassId">게시판 종류</label>
+                    <select name="boardClassId" id="boardClassId" class="select">
+                        <option value disabled selected>게시판 종류를 선택해주세요.</option>
+                        <option th:each="boardClass : ${boardClasses}"
+                                th:value="${boardClass.id}"
+                                th:text="${boardClass.className}">
+                        </option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit" class="btn">제출</button>
+                </div>
+            </form>
 
-            <button type="submit">제출</button>
-        </form>
-    </section>
-</body>
+            <script>
+                function checkForm(form)
+                {
+                    // 게시판 이름 확인
+                    form.title.value = form.title.value.trim();
+                    const title = form.title;
+
+                    if (title.value === "")
+                    {
+                        alert("게시판 이름을 입력해주세요.");
+                        title.focus();
+                        return;
+                    }
+
+                    // 게시판 종류 확인
+                    form.boardClassId.value = form.boardClassId.value.trim();
+                    const boardClassId = form.boardClassId;
+
+                    if (boardClassId.value === "")
+                    {
+                        alert("게시판 종류를 선택해주세요.");
+                        boardClassId.focus();
+                        return;
+                    }
+
+                    form.submit();
+                }
+            </script>
+        </section>
+    </body>
 </html>
