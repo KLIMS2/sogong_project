@@ -55,6 +55,9 @@ dependencies {
 
 	// JSoup
 	implementation("org.jsoup:jsoup:1.15.4")
+
+	// valid
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 }
 
 tasks.withType<Test> {
