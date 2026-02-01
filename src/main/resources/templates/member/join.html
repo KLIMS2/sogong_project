@@ -3,11 +3,12 @@
     <section layout:fragment="content">
         <div><h1>join</h1></div>
 
-        <form th:action="@{/member/join}" method="post">
-            <div>이름</div>
-            <input type="text" placeholder="이름" name="username">
+        <form th:action="@{/member/join}" method="post" onsubmit="checkForm(this); return false;">
+            <div>아이디</div>
+            <input type="text" name="username" placeholder="아이디" th:value="${member != null ? member.username : ''}">
+
             <div>비밀번호</div>
-            <input type="password" placeholder="비밀번호" name="password">
+            <input type="password" name="password" placeholder="비밀번호" th:value="${member != null ? member.password : ''}">
 
             <div>
                 <button type="submit" class="btn">제출</button>
@@ -16,3 +17,30 @@
     </section>
 </body>
 </html>
+
+<script>
+    function checkForm(form)
+    {
+        form.username.value = form.username.value.trim();
+        var username = form.username;
+
+        if (username.value.length == 0)
+        {
+            alert("username not found");
+            username.focus();
+            return;
+        }
+
+        form.password.value = form.password.value.trim();
+        var password = form.password;
+
+        if (password.value.length == 0)
+        {
+            alert("password not found");
+            password.focus();
+            return;
+        }
+
+        form.submit();
+    }
+</script>
