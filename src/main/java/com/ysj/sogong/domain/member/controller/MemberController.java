@@ -31,16 +31,23 @@ public class MemberController
   {
     final String JOIN_FORM = "/member/join";
     
-    // 값 입력 유무, 값의 길이 등의 유효성 판단
+    // 값 입력 유무, 값의 길이 등의 유효성 검사
     if(bindingResult.hasErrors())
     {
       model.addAttribute("member", memberForm);
       return JOIN_FORM;
     }
 
-    // 아이디 중복 유효성 판단
+    // 아이디 중복 유효성 검사
     Member findMember = memberService.findMember(memberForm.getUsername());
     if(findMember != null)
+    {
+      model.addAttribute("member", memberForm);
+      return JOIN_FORM;
+    }
+    
+    // 비밀번호 확인 유효성 검사
+    if(!memberForm.getPassword().equals(memberForm.getPasswordConfirm()))
     {
       model.addAttribute("member", memberForm);
       return JOIN_FORM;
