@@ -6,15 +6,17 @@
             <form th:action="@{/board/create}"
                   method="post"
                   onsubmit="checkForm(this); return false;"
+                  th:object="${boardForm}"
                   class="flex flex-col gap-2">
                 <div class="flex flex-col">
                     <label for="title">게시판 이름</label>
                     <input type="text"
-                           name="title"
-                           id="title"
+                           th:field="*{title}"
                            placeholder="게시판 이름"
                            class="input"/>
                 </div>
+                <div th:replace="~{error/error :: form(title)}"></div>
+
                 <div class="flex flex-col">
                     <label for="boardClassId">게시판 종류</label>
                     <select name="boardClassId" id="boardClassId" class="select">
@@ -25,12 +27,22 @@
                         </option>
                     </select>
                 </div>
+                <div th:replace="~{error/error :: form(boardClassId)}"></div>
+
                 <div>
                     <button type="submit" class="btn">제출</button>
                 </div>
             </form>
 
             <script>
+                // 뒤로가기로 페이지 접근 방지
+                window.onpageshow = function(event) {
+                    if (event.persisted || (window.performance && window.performance.navigation.type === 2))
+                    {
+                        location.replace('/');
+                    }
+                };
+
                 function checkForm(form)
                 {
                     // 게시판 이름 확인

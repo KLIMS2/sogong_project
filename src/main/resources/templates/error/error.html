@@ -1,23 +1,6 @@
-<!-- 아이디 오류 -->
-<div th:fragment="username"
+<div th:fragment="form(field)"
      role="alert"
-     th:if="${#fields.hasErrors('username')}"
+     th:if="${#fields.hasErrors('__${field}__')}"
      class="alert block bg-[#aa000055] font-bold">
-    <div th:each="error : ${#fields.errors('username')}" th:text="${error}"></div>
-</div>
-
-<!-- 비밀번호 오류 -->
-<div th:fragment="password"
-     role="alert"
-     th:if="${#fields.hasErrors('password')}"
-     class="alert block bg-[#aa000055] font-bold">
-    <div th:each="error : ${#fields.errors('password')}" th:text="${error}"></div>
-</div>
-
-<!-- 확인 비밀번호 오류 -->
-<div th:fragment="passwordConfirm"
-     role="alert"
-     th:if="${#fields.hasErrors('passwordConfirm')}"
-     class="alert block bg-[#aa000055] font-bold">
-    <div th:each="error : ${#fields.errors('passwordConfirm')}" th:text="${error}"></div>
+    <div th:each="error : ${#fields.errors('__${field}__')}" th:text="${error}"></div>
 </div>

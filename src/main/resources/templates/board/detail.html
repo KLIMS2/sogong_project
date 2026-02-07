@@ -1,13 +1,19 @@
 <html layout:decorate="~{layout/layout.html}">
-<body>
-    <section layout:fragment="content">
-        <h1>board detail</h1>
+    <body>
+        <section layout:fragment="content">
+            <h1>board detail</h1>
 
-        <div th:text="|id: ${board.id}|"></div>
-        <div th:text="|username: ${board.username}|"></div>
-        <div th:text="|title: ${board.title}|"></div>
-        <div th:text="|boardClassId: ${board.boardClass.id}|"></div>
-        <div th:text="|boardClassName: ${board.boardClass.className}|"></div>
-    </section>
-</body>
+            <div th:if="${board}">
+                <div th:text="|id: ${board.id}|"></div>
+                <div th:text="|username: ${board.username}|"></div>
+                <div th:text="|title: ${board.title}|"></div>
+                <div th:text="|boardClassId: ${board.boardClass.id}|"></div>
+                <div th:text="|boardClassName: ${board.boardClass.className}|"></div>
+            </div>
+
+            <div th:unless="${board}">
+                <span>게시판이 존재하지 않습니다</span>
+            </div>
+        </section>
+    </body>
 </html>
