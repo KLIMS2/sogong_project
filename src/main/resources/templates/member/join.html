@@ -79,10 +79,38 @@
                     document.getElementById('checkUsername').value = bool;
                     const form = document.getElementById('joinForm');
 
-                    // 공백 처리
+                    // 아이디 확인
                     form.username.value = form.username.value.trim();
+                    const username = form.username;
+
+                    if (username.value === "")
+                    {
+                        alert("아이디를 입력해주세요.");
+                        username.focus();
+                        return;
+                    }
+
+                    // 비밀번호 확인
                     form.password.value = form.password.value.trim();
+                    const password = form.password;
+
+                    if (password.value === "")
+                    {
+                        alert("비밀번호를 입력해주세요.");
+                        password.focus();
+                        return;
+                    }
+
+                    // 확인 비밀번호 확인
                     form.passwordConfirm.value = form.passwordConfirm.value.trim();
+                    const passwordConfirm = form.passwordConfirm;
+
+                    if (passwordConfirm.value === "")
+                    {
+                        alert("확인 비밀번호를 입력해주세요.");
+                        passwordConfirm.focus();
+                        return;
+                    }
 
                     // 폼 제출
                     form.submit();
