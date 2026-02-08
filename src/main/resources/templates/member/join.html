@@ -75,9 +75,11 @@
 
                 function checkForm(bool)
                 {
-                    // checkUsername 필드값 결정
-                    document.getElementById('checkUsername').value = bool;
                     const form = document.getElementById('joinForm');
+
+                    // checkUsername 필드값 결정
+                    const checkUsername = form.checkUsername;
+                    checkUsername.value = bool;
 
                     // 아이디 확인
                     form.username.value = form.username.value.trim();
@@ -90,26 +92,39 @@
                         return;
                     }
 
-                    // 비밀번호 확인
-                    form.password.value = form.password.value.trim();
-                    const password = form.password;
+                    if(username.)
 
-                    if (password.value === "")
+                    if(bool === 'false')
                     {
-                        alert("비밀번호를 입력해주세요.");
-                        password.focus();
-                        return;
-                    }
+                        // 비밀번호 확인
+                        form.password.value = form.password.value.trim();
+                        const password = form.password;
 
-                    // 확인 비밀번호 확인
-                    form.passwordConfirm.value = form.passwordConfirm.value.trim();
-                    const passwordConfirm = form.passwordConfirm;
+                        if (password.value === "")
+                        {
+                            alert("비밀번호를 입력해주세요.");
+                            password.focus();
+                            return;
+                        }
 
-                    if (passwordConfirm.value === "")
-                    {
-                        alert("확인 비밀번호를 입력해주세요.");
-                        passwordConfirm.focus();
-                        return;
+                        // 확인 비밀번호 확인
+                        form.passwordConfirm.value = form.passwordConfirm.value.trim();
+                        const passwordConfirm = form.passwordConfirm;
+
+                        if (passwordConfirm.value === "")
+                        {
+                            alert("확인 비밀번호를 입력해주세요.");
+                            passwordConfirm.focus();
+                            return;
+                        }
+
+                        // 비밀번호 일치 여부 확인
+                        if(password.value !== passwordConfirm.value)
+                        {
+                            alert("비밀번호가 일치하지 않습니다.");
+                            passwordConfirm.focus();
+                            return;
+                        }
                     }
 
                     // 폼 제출

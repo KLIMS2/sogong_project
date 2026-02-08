@@ -3,6 +3,8 @@ package com.ysj.sogong.domain.member.service;
 import com.ysj.sogong.domain.member.entity.Member;
 import com.ysj.sogong.domain.member.form.MemberForm;
 import com.ysj.sogong.domain.member.repository.MemberRepository;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,5 +36,10 @@ public class MemberService
   public Member findMember(String username)
   {
     return memberRepository.findByUsername(username);
+  }
+
+  public boolean isUsernameAvailable(String username)
+  {
+    return findMember(username) == null;
   }
 }

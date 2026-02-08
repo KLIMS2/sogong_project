@@ -1,10 +1,7 @@
 package com.ysj.sogong.domain.member.controller;
 
-import com.ysj.sogong.domain.member.entity.Member;
 import com.ysj.sogong.domain.member.form.MemberForm;
 import com.ysj.sogong.domain.member.service.MemberService;
-import com.ysj.sogong.global.request.Rq;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RequiredArgsConstructor
 @RequestMapping("/member")
@@ -32,23 +30,14 @@ public class MemberController
   public String doJoin(@Valid MemberForm memberForm,
                        BindingResult bindingResult,
                        Model model,
-                       HttpServletResponse resp)
+                       RedirectAttributes redirectAttributes)
   {
     final String JOIN_FORM = "/member/join";
 
+    // 중복 확인 버튼 처리
     if(memberForm.isCheckUsername())
     {
-      // 중복 확인 버튼 전용 아이디 중복 검사
-      Member findMember = memberService.findMember(memberForm.getUsername());
-      if(findMember != null)
-      {
-        model.addAttribute("isValid", false);
-      }
-      else
-      {
-        model.addAttribute("isValid", true);
-      }
-
+      model.addAttribute("isValid", memberService.isUsernameAvailable(memberForm.getUsername()));
       return JOIN_FORM;
     }
 
@@ -58,7 +47,7 @@ public class MemberController
       return JOIN_FORM;
     }
 
-    // 비밀번호 확인 검사
+    // 비밀번호 일치 여부 검사
     if(!memberForm.getPassword().equals(memberForm.getPasswordConfirm()))
     {
       bindingResult.rejectValue("passwordConfirm", "Not_Confirmed", "비밀번호와 일치하지 않습니다");
@@ -66,8 +55,7 @@ public class MemberController
     }
 
     // 아이디 중복 검사
-    Member findMember = memberService.findMember(memberForm.getUsername());
-    if(findMember != null)
+    if(!memberService.isUsernameAvailable(memberForm.getUsername()))
     {
       bindingResult.rejectValue("username", "Overlap_Username", "이미 사용된 아이디입니다");
       return JOIN_FORM;
@@ -75,12 +63,11 @@ public class MemberController
 
     // 회원가입
     memberService.createMember(memberForm);
-    
-    // 회원가입 후 처리과정
-    Rq rq = new Rq(resp);
-    rq.printAlert(memberForm.getUsername() + "님 회원가입 성공!");
-    rq.replace("/member/login");
-    return null;
+
+    // PRG 패턴 - 타임리프 표준 방식으로 작업
+    redirectAttributes.addFlashAttribute("successMessage", "%s님 회원가입이 완료되었습니다".formatted(memberForm.getUsername()));
+
+    return "redirect:/member/login";
   }
 
   @GetMapping("/login")

@@ -80,6 +80,12 @@ class SogongApplicationTests
 	}
 
 	@Test
+	void asdf()
+	{
+		// Util 클래스 함수 테스트
+	}
+
+	@Test
 	@DisplayName("JSoup test")
 	void t2()
 	{
