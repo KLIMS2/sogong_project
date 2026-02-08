@@ -14,13 +14,14 @@
                         <input type="text"
                                th:field="*{username}"
                                placeholder="아아디"
+                               oninput="hideValidator('validator-username');"
                                class="input"/>
 
                         <!-- 아이디 중복 확인용 -->
                         <button type="button" onclick="checkForm('true')" class="btn ml-2 mr-2">
                             중복 확인
                         </button>
-                        <div th:if="${isValid != null}">
+                        <div th:if="${isValid != null}" class="validator-username">
                             <div th:if="${isValid}"
                                  class="flex items-center justify-center bg-[#00aa0055] border h-10 w-16">
                                 가능
@@ -32,7 +33,7 @@
                         </div>
                     </div>
                 </div>
-                <div th:if="${isValid == null}">
+                <div th:if="${isValid == null}" class="validator-username">
                     <div th:replace="~{error/error :: form(username)}"></div>
                 </div>
 
@@ -41,9 +42,10 @@
                     <input type="password"
                            th:field="*{password}"
                            placeholder="비밀번호"
+                           oninput="hideValidator('validator-password');"
                            class="input"/>
                 </div>
-                <div th:if="${isValid == null}">
+                <div th:if="${isValid == null}" class="validator-password">
                     <div th:replace="~{error/error :: form(password)}"></div>
                 </div>
 
@@ -52,9 +54,10 @@
                     <input type="password"
                            th:field="*{passwordConfirm}"
                            placeholder="비밀번호 확인"
+                           oninput="hideValidator('validator-passwordConfirm');"
                            class="input"/>
                 </div>
-                <div th:if="${isValid == null}">
+                <div th:if="${isValid == null}" class="validator-passwordConfirm">
                     <div th:replace="~{error/error :: form(passwordConfirm)}"></div>
                 </div>
 
@@ -83,52 +86,76 @@
 
                     // 아이디 확인
                     form.username.value = form.username.value.trim();
-                    const username = form.username;
+                    const username = form.username.value;
 
-                    if (username.value === "")
+                    if (username === "")
                     {
                         alert("아이디를 입력해주세요.");
-                        username.focus();
+                        form.username.focus();
                         return;
                     }
-
-                    if(username.)
+                    else if(username.length < 2 || username.length > 30)
+                    {
+                        alert("아이디의 크기는 2 ~ 30 사이여야 합니다");
+                        form.username.focus();
+                        return;
+                    }
 
                     if(bool === 'false')
                     {
                         // 비밀번호 확인
                         form.password.value = form.password.value.trim();
-                        const password = form.password;
+                        const password = form.password.value;
 
-                        if (password.value === "")
+                        if (password === "")
                         {
                             alert("비밀번호를 입력해주세요.");
-                            password.focus();
+                            form.password.focus();
+                            return;
+                        }
+                        else if(password.length < 4 || password.length > 30)
+                        {
+                            alert("비밀번호의 크기는 4 ~ 30 사이여야 합니다");
+                            form.password.focus();
                             return;
                         }
 
                         // 확인 비밀번호 확인
                         form.passwordConfirm.value = form.passwordConfirm.value.trim();
-                        const passwordConfirm = form.passwordConfirm;
+                        const passwordConfirm = form.passwordConfirm.value;
 
-                        if (passwordConfirm.value === "")
+                        if (passwordConfirm === "")
                         {
                             alert("확인 비밀번호를 입력해주세요.");
-                            passwordConfirm.focus();
+                            form.passwordConfirm.focus();
+                            return;
+                        }
+                        else if(passwordConfirm.length < 4 || passwordConfirm.length > 30)
+                        {
+                            alert("확인 비밀번호의 크기는 4 ~ 30 사이여야 합니다");
+                            form.passwordConfirm.focus();
                             return;
                         }
 
                         // 비밀번호 일치 여부 확인
-                        if(password.value !== passwordConfirm.value)
+                        if(password !== passwordConfirm)
                         {
                             alert("비밀번호가 일치하지 않습니다.");
-                            passwordConfirm.focus();
+                            form.passwordConfirm.focus();
                             return;
                         }
                     }
 
                     // 폼 제출
                     form.submit();
+                }
+
+                function hideValidator(validatorClass)
+                {
+                    const validators = document.getElementsByClassName(validatorClass);
+                    Array.from(validators).forEach(validator => {
+                        validator.style.display = 'none';
+                    });
                 }
             </script>
         </section>
