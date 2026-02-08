@@ -2,6 +2,7 @@ package com.ysj.sogong.domain.member.controller;
 
 import com.ysj.sogong.domain.member.form.MemberForm;
 import com.ysj.sogong.domain.member.service.MemberService;
+import com.ysj.sogong.global.request.Rq;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,8 +22,9 @@ public class MemberController
   private final MemberService memberService;
 
   @GetMapping("/join")
-  public String showJoin(MemberForm memberForm)
+  public String showJoin(MemberForm memberForm, Model model)
   {
+    Rq.settingInputSize(MemberForm.class, model);
     return "/member/join";
   }
 
@@ -33,6 +35,7 @@ public class MemberController
                        RedirectAttributes redirectAttributes)
   {
     final String JOIN_FORM = "/member/join";
+    Rq.settingInputSize(MemberForm.class, model);
 
     // 중복 확인 버튼 처리
     if(memberForm.isCheckUsername())

@@ -67,7 +67,7 @@
                 </div>
             </form>
 
-            <script>
+            <script th:inline="javascript">
                 // 뒤로가기로 페이지 접근 방지
                 window.onpageshow = function(event) {
                     if (event.persisted || (window.performance && window.performance.navigation.type === 2))
@@ -87,6 +87,8 @@
                     // 아이디 확인
                     form.username.value = form.username.value.trim();
                     const username = form.username.value;
+                    const min_username = [[${input_size.username.min}]];
+                    const max_username = [[${input_size.username.max}]];
 
                     if (username === "")
                     {
@@ -94,9 +96,9 @@
                         form.username.focus();
                         return;
                     }
-                    else if(username.length < 2 || username.length > 30)
+                    else if(username.length < min_username || username.length > max_username)
                     {
-                        alert("아이디의 크기는 2 ~ 30 사이여야 합니다");
+                        alert(`아이디의 크기는 ${min_username} ~ ${max_username} 사이여야 합니다`);
                         form.username.focus();
                         return;
                     }
@@ -106,6 +108,8 @@
                         // 비밀번호 확인
                         form.password.value = form.password.value.trim();
                         const password = form.password.value;
+                        const min_password = [[${input_size.password.min}]];
+                        const max_password = [[${input_size.password.max}]];
 
                         if (password === "")
                         {
@@ -113,9 +117,9 @@
                             form.password.focus();
                             return;
                         }
-                        else if(password.length < 4 || password.length > 30)
+                        else if(password.length < min_password || password.length > max_password)
                         {
-                            alert("비밀번호의 크기는 4 ~ 30 사이여야 합니다");
+                            alert(`비밀번호의 크기는 ${min_password} ~ ${max_password} 사이여야 합니다`);
                             form.password.focus();
                             return;
                         }
@@ -123,6 +127,8 @@
                         // 확인 비밀번호 확인
                         form.passwordConfirm.value = form.passwordConfirm.value.trim();
                         const passwordConfirm = form.passwordConfirm.value;
+                        const min_passwordConfirm = [[${input_size.passwordConfirm.min}]];
+                        const max_passwordConfirm = [[${input_size.passwordConfirm.max}]];
 
                         if (passwordConfirm === "")
                         {
@@ -130,9 +136,9 @@
                             form.passwordConfirm.focus();
                             return;
                         }
-                        else if(passwordConfirm.length < 4 || passwordConfirm.length > 30)
+                        else if(passwordConfirm.length < min_passwordConfirm || passwordConfirm.length > max_passwordConfirm)
                         {
-                            alert("확인 비밀번호의 크기는 4 ~ 30 사이여야 합니다");
+                            alert(`확인 비밀번호의 크기는 ${min_passwordConfirm} ~ ${max_passwordConfirm} 사이여야 합니다`);
                             form.passwordConfirm.focus();
                             return;
                         }

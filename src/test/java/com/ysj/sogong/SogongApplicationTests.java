@@ -2,7 +2,10 @@ package com.ysj.sogong;
 
 import com.ysj.sogong.domain.member.controller.MemberController;
 import com.ysj.sogong.domain.member.entity.Member;
+import com.ysj.sogong.domain.member.form.MemberForm;
 import com.ysj.sogong.domain.member.service.MemberService;
+import com.ysj.sogong.global.request.Rq;
+import com.ysj.sogong.global.utility.Util;
 import jakarta.transaction.Transactional;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,6 +19,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.ui.Model;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -25,6 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 @AutoConfigureMockMvc
 @Transactional
@@ -80,14 +86,24 @@ class SogongApplicationTests
 	}
 
 	@Test
-	void asdf()
+	@DisplayName("get annotaion value in MemberForm")
+	void t2()
 	{
-		// Util 클래스 함수 테스트
+		List<String> fieldNames = Util.getFieldNames(MemberForm.class);
+		for(String fieldName : fieldNames)
+		{
+			System.out.println("---\n" + fieldName + "\n---");
+
+			Map<String, Object> map = Util.getAnnotaionValues(MemberForm.class, fieldName);
+			map.forEach((name, value) -> {
+				System.out.println(name + ": " + value);
+			});
+		}
 	}
 
 	@Test
 	@DisplayName("JSoup test")
-	void t2()
+	void t3()
 	{
 		String url = "https://www.sogang.ac.kr/ko/story/notification-general";
 

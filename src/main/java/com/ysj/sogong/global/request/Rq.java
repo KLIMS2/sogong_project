@@ -1,14 +1,26 @@
 package com.ysj.sogong.global.request;
 
+import com.ysj.sogong.global.utility.Util;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.ui.Model;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Rq
 {
   private HttpServletRequest req;
   private HttpServletResponse resp;
+
+  private static Map<String, Map<String, Map<String, Object>>> cache;
+
+  static
+  {
+    cache = new LinkedHashMap<>();
+  }
 
   public Rq(HttpServletResponse resp)
   {
@@ -22,7 +34,9 @@ public class Rq
     this.resp.setHeader("Expires", "0"); // Proxies.
   }
 
-  /* html 관련 */
+  /*
+  html 관련
+  */
 
   private boolean print(String html)
   {
@@ -53,5 +67,39 @@ public class Rq
             location.replace('%s');
         </script>
         """.formatted(url));
+  }
+
+  /*
+  일반 함수 관련
+   */
+
+  public static void settingInputSize(Class<?> clazz, Model model)
+  {
+    // 캐시에 없을 시 캐시 생성
+    String className = clazz.getName();
+    if(!cache.containsKey(className))
+    {
+      Map<String, Map<String, Object>> cacheData = new LinkedHashMap<>();
+      cache.put(className, cacheData);
+    }
+
+    // 캐시에서 데이터 불러오기
+    Map<String, Map<String, Object>> input_size = cache.get(className);
+
+    // 캐시에 데이터가 없으면 데이터 생성 후 캐시에 저장
+    if(input_size.isEmpty())
+    {
+      List<String> fieldNames = Util.getFieldNames(clazz);
+      for(String fieldName : fieldNames)
+      {
+        Map<String, Object> data = Util.getAnnotaionValues(clazz, fieldName);
+        input_size.put(fieldName, data);
+      }
+
+      cache.put(className, input_size);
+    }
+
+    // 모델에 어노테이션 값을 넘김
+    model.addAttribute("input_size", input_size);
   }
 }
